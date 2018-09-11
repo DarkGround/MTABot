@@ -101,6 +101,22 @@ if(message.content.slice(0,6) == '::say ') {
     }while(integ = 0)
     return false;
 }
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+var version = 'Версия InDev v1.22 - discord.js // JavaScript';
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+if(message.content.slice(0,6) == '::ver ') {
+    if(message.author.id != '297318282724114433'){
+        message.channel.send(`Эта команда доступна только для cosmocat.`);
+        return null;
+    }
+    var ttl = message.content.replace('::ver ','')
+    var integ = 0
+    do {
+        integ = 1
+        message.channel.send(`${version}`);
+    }while(integ = 0)
+    return false;
+}
 function getRandomInt(min, max) {
   return Math.floor(Math.random() * (max - min + 1)) + min;
 }
