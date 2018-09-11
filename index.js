@@ -13,7 +13,7 @@ console.log('FULL - CONTROL MODE')
 console.log('::help for a help in discord.')
 Bot.on('message',(message)=>{
     if(message.content == "::help"){
-        console.log(`[DISCORD] ${message.author.username} ::help`)
+        console.log(`[DISCORD] (${message.author.username}) => ${message.content}`)
         message.channel.send(`[Префикс - ::] Команды: \n me <действие> - действие от первого лица \n try <действие> - попытать удачу \n do <действие> - действие от третьего лица \n dot <действие> | <выражение> - сделать что-то сказавши`);
     }
 if(message.content.includes('::me ',0) == true) {
