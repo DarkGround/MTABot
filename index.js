@@ -70,7 +70,7 @@ if(message.content.slice(0,6) == '::dot ') {
     message.channel.send(`_${message.author.username}_ **${ttl2}** _,сказал(а):_ **${ttl}**`);
     return false;
 }
-if(message.content.slice(0,12) == '::debughelp '){
+if(message.content.slice(0,12) == '::debughelp'){
     if(message.author.id != '297318282724114433'){
         message.channel.send(`Эта команда доступна только для cosmocat.`);
     }
