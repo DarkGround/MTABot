@@ -13,7 +13,7 @@ console.log('::help for a help in discord.')
 Bot.on('message',(message)=>{
     if(message.content == "::help"){
         console.log(`[DISCORD] ({${message.guild.name}} ${message.author.username}) => ${message.content}`)
-        message.channel.send(`[Префикс - ::] Команды: \n me <действие> - действие от первого лица \n try <действие> - попытать удачу \n do <действие> - действие от третьего лица \n dot <действие> | <выражение> - сделать что-то сказавши`);
+        message.channel.send(`Команды: \n ::me <действие> - действие от первого лица \n ::try <действие> - попытать удачу \n ::do <действие> - действие от третьего лица \n ::dot <действие> | <выражение> - сделать что-то сказавши`);
     }
 if(message.content.slice(0,5) == '::me ') {
     console.log(`[DISCORD] (${message.author.username}) => ${message.content}`)
@@ -26,7 +26,7 @@ if(message.content.slice(0,5) == '::me ') {
     
     return false;
 }
-if(message.content.includes('::try ',0) == true) {
+if(message.content.slice(0,6) == '::try ') {
     console.log(`[DISCORD] ${message.author.username}  ${message.content}`)
     var ttl = message.content.replace('::try ','')
     var integ = 0;
@@ -44,7 +44,7 @@ if(message.content.includes('::try ',0) == true) {
     } while(integ = 0)
     return false;
 }
-if(message.content.includes('::do ',0) == true) {
+if(message.content.slice(0,5) == '::do ') {
     console.log(`[DISCORD] ${message.author.username}  ${message.content}`)
     var ttl = message.content.replace('::do ','')
     var integ = 0;
@@ -52,7 +52,7 @@ if(message.content.includes('::do ',0) == true) {
     message.channel.send(`**${ttl}** ((_${message.author.username}_))`);
     return false;
 }
-if(message.content.includes('::dot ',0) == true) {
+if(message.content.slice(0,6) == '::dot ') {
     console.log(`[DISCORD] ${message.author.username}  ${message.content}`)
     var ttl = message.content.replace('::dot ','')
     var ttl2 = message.content.replace('::dot ','')
