@@ -5,7 +5,6 @@ const { RichEmbed } = require('discord.js');
 const { Message } = require('discord.js');
 const { User } = require('discord.js');
 const { Presence } = require('discord.js');
-const { RichPresenceAssets } = require('discord.js');
 const { Guild } = require('discord.js');
 Bot.login(process.env.token);
 console.log('MTAshnik v1.0 Launched.')
@@ -13,7 +12,7 @@ console.log('FULL - CONTROL MODE')
 console.log('::help for a help in discord.')
 Bot.on('message',(message)=>{
     if(message.content == "::help"){
-        console.log(`[DISCORD] (${message.author.username}) => ${message.content}`)
+        console.log(`[DISCORD] ({${message.guild.name}} ${message.author.username}) => ${message.content}`)
         message.channel.send(`[Префикс - ::] Команды: \n me <действие> - действие от первого лица \n try <действие> - попытать удачу \n do <действие> - действие от третьего лица \n dot <действие> | <выражение> - сделать что-то сказавши`);
     }
 if(message.content.slice(0,5) == '::me ') {
