@@ -71,6 +71,9 @@ if(message.content.slice(0,6) == '::dot ') {
     return false;
 }
 if(message.content.slice(0,6) == '::debughelp'){
+    if(message.author.id != '297318282724114433'){
+        message.channel.send(`Эта команда доступна только для cosmocat.`);
+    }
     console.log(`[DISCORD] ({${message.guild.name}} ${message.author.username} :: ${message.author.id}) => ${message.content}`)
     message.channel.send(`Команды: \n ::me <действие> - действие от первого лица \n ::try <действие> - попытать удачу \n ::do <действие> - действие от третьего лица \n ::dot <действие> | <выражение> - сделать что-то сказавши`);
 }
