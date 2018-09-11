@@ -80,14 +80,12 @@ if(message.content.slice(0,6) == '::say ') {
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 var version = 'Версия InDev v1.22 - discord.js // JavaScript';
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-if(message.content.slice(0,6) == '::ver ') {
+if(message.content.slice(0,6) == '::ver') {
     if(message.author.id != '297318282724114433'){
         message.channel.send(`Эта команда доступна только для cosmocat.`);
         return null;
     }
-    var ttl = message.content.replace('::ver ','')
-        integ = 1
-        message.channel.send(`${version}`);
+    message.channel.send(`${version}`);
     return false;
 }
 function getRandomInt(min, max) {
