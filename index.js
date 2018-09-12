@@ -14,7 +14,7 @@ Bot.on('message',(message)=>{
     if(message.content == "::help"){
         console.log(`[DISCORD] ({${message.guild.name}} ${message.author.username} :: ${message.author.id}) => ${message.content}`)
         var integ = 0;
-            message.channel.send(`Команды: \n ::me <действие> - действие от первого лица \n ::try <действие> - попытать удачу \n ::do <действие> - действие от третьего лица \n ::todo <действие> | <выражение> - сказать что-то сделавши`);
+            message.channel.send(`Команды: \n ::me <действие> - действие от первого лица \n ::try <действие> - попытать удачу \n ::do <действие> - действие от третьего лица \n ::todo <выражение>*<действие> - сказать что-то сделавши`);
 
     }
 if(message.content.slice(0,5) == '::me ') {
