@@ -57,7 +57,7 @@ if(message.content.slice(0,7) == '::todo ') {
             ttl = ttl.replace(ttl.slice(0,index + 1),'')
         }
     }
-    message.channel.send(`**"${ttl}"**, - сказал(а) _${message.author.username}_, **${ttl2}**`);
+    message.channel.send(`**"${ttl2}"**, - сказал(а) _${message.author.username}_, **${ttl}**`);
     return false;
 }
 if(message.content.slice(0,12) == '::debughelp'){
