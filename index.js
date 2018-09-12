@@ -88,6 +88,14 @@ if(message.content.slice(0,6) == '::ver') {
     message.channel.send(`${version}`);
     return false;
 }
+if(message.content.slice(0,7) == '::xyeta') {
+    if(message.author.id != '297318282724114433'){
+        message.channel.send(`Эта команда доступна только для cosmocat.`);
+        return null;
+    }
+    message.channel.send(`t!profile`);
+    return false;
+}
 function getRandomInt(min, max) {
   return Math.floor(Math.random() * (max - min + 1)) + min;
 }
