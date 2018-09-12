@@ -49,7 +49,7 @@ if(message.content.slice(0,7) == '::todo ') {
     var ttl2 = message.content.replace('::todo ','')
     for (var index = 0; index < ttl2.length; index++) {
         if(ttl2.charAt(index) == '*'){
-            ttl2 = ttl2.replace(ttl2.slice(index - 1,ttl2.length),'')
+            ttl2 = ttl2.replace(ttl2.slice(index,ttl2.length),'')
         }
     }
     for (var index = 0; index < ttl.length; index++) {
