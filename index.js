@@ -1,59 +1,11 @@
 ﻿const Discord = require('discord.js');
 const Bot = new Discord.Client();
-const { Client } = require('discord.js');
-const { RichEmbed } = require('discord.js');
-const { Message } = require('discord.js');
-const { User } = require('discord.js');
-const { Presence } = require('discord.js');
-const { Guild } = require('discord.js');
-const config = require('./config.json')
-const rpc = new DiscordRPC.Client({
-	transport: 'ipc'
-});
-var d1 = new Date ();
-var d2 = new Date(d1);
-d2.setSeconds(d1.getSeconds() + config.Rich_Presence.countdown_start);
-////////
-rpc.setActivity({
-    details: config.Rich_Presence.details,
-    state: config.Rich_Presence.state,
-    largeImageKey: config.Rich_Presence.file_bannername,
-    largeImageText: config.Rich_Presence.bannername,
-    smallImageKey: config.Rich_Presence.file_username,
-    smallImageText: config.Rich_Presence.username,
-    instance: false,
-    partySize: 0,
-    partyMax: config.Rich_Presence.maxpartysize,
-    startTimestamp: d1,
-    endTimestamp: d2
-}).then(console.clear(), console.log(banner), console.log(`RPC has been set! If it doesn’t set immediately please wait for it to refresh (if set) or just re-node app.js`)).catch(err => { });
-if (config.Rich_Presence.Refresh) {
-    // Activity can only be set every 15 seconds
-    setInterval(() => {
-    //Create random party size every update
-    var partysize = Math.floor(Math.random() * (config.Rich_Presence.maxpartysize - 0 + 1)) + 0;
-    //Resetting the timer
-    var t1 = new Date();
-    var t2 = new Date ( t1 );
-    t2.setSeconds(t1.getSeconds() + config.Rich_Presence.countdown_start);
-    //Setting the activity again with updated values	
-    rpc.setActivity({
-        details: config.Rich_Presence.details,
-        state: config.Rich_Presence.state,
-        largeImageKey: config.Rich_Presence.file_bannername,
-        largeImageText: config.Rich_Presence.bannername,
-        smallImageKey: config.Rich_Presence.file_username,
-        smallImageText: config.Rich_Presence.username,
-        instance: false,
-        partySize: partysize,
-        partyMax: config.Rich_Presence.maxpartysize,
-        startTimestamp: t1,
-        endTimestamp: t2
-    }).then(console.clear(), console.log(banner), console.log(`Updated the RPC ${++config.Dont_Touch.updatecounter} time(s)!`)).catch(err => {});
-  }, (config.Rich_Presence.Refresh_time * 1000));
-}
-rpc.login(config.Client_Id).catch(console.error);
-////////
+const Client = require('discord.js');
+const RichEmbed = require('discord.js');
+const Message = require('discord.js');
+const User = require('discord.js');
+const Presence = require('discord.js');
+const Guild = require('discord.js');
 Bot.login(process.env.token);
 console.log('MTAshnik v1.0 Launched.')
 console.log('FULL - CONTROL MODE')
