@@ -6,6 +6,54 @@ const { Message } = require('discord.js');
 const { User } = require('discord.js');
 const { Presence } = require('discord.js');
 const { Guild } = require('discord.js');
+const config = require('./config.json')
+const rpc = new DiscordRPC.Client({
+	transport: 'ipc'
+});
+var d1 = new Date ();
+var d2 = new Date(d1);
+d2.setSeconds(d1.getSeconds() + config.Rich_Presence.countdown_start);
+////////
+rpc.setActivity({
+    details: config.Rich_Presence.details,
+    state: config.Rich_Presence.state,
+    largeImageKey: config.Rich_Presence.file_bannername,
+    largeImageText: config.Rich_Presence.bannername,
+    smallImageKey: config.Rich_Presence.file_username,
+    smallImageText: config.Rich_Presence.username,
+    instance: false,
+    partySize: 0,
+    partyMax: config.Rich_Presence.maxpartysize,
+    startTimestamp: d1,
+    endTimestamp: d2
+}).then(console.clear(), console.log(banner), console.log(`RPC has been set! If it doesn’t set immediately please wait for it to refresh (if set) or just re-node app.js`)).catch(err => { });
+if (config.Rich_Presence.Refresh) {
+    // Activity can only be set every 15 seconds
+    setInterval(() => {
+    //Create random party size every update
+    var partysize = Math.floor(Math.random() * (config.Rich_Presence.maxpartysize - 0 + 1)) + 0;
+    //Resetting the timer
+    var t1 = new Date();
+    var t2 = new Date ( t1 );
+    t2.setSeconds(t1.getSeconds() + config.Rich_Presence.countdown_start);
+    //Setting the activity again with updated values	
+    rpc.setActivity({
+        details: config.Rich_Presence.details,
+        state: config.Rich_Presence.state,
+        largeImageKey: config.Rich_Presence.file_bannername,
+        largeImageText: config.Rich_Presence.bannername,
+        smallImageKey: config.Rich_Presence.file_username,
+        smallImageText: config.Rich_Presence.username,
+        instance: false,
+        partySize: partysize,
+        partyMax: config.Rich_Presence.maxpartysize,
+        startTimestamp: t1,
+        endTimestamp: t2
+    }).then(console.clear(), console.log(banner), console.log(`Updated the RPC ${++config.Dont_Touch.updatecounter} time(s)!`)).catch(err => {});
+  }, (config.Rich_Presence.Refresh_time * 1000));
+}
+rpc.login(config.Client_Id).catch(console.error);
+////////
 Bot.login(process.env.token);
 console.log('MTAshnik v1.0 Launched.')
 console.log('FULL - CONTROL MODE')
@@ -88,29 +136,7 @@ if(message.content.slice(0,6) == '::ver') {
     message.channel.send(`${version}`);
     return false;
 }
-if(message.content.slice(0,7) == '::xyeta') {
-    if(message.author.id != '297318282724114433'){
-        message.channel.send(`Эта команда доступна только для cosmocat.`);
-        return null;
-    }
-    message.channel.send(`t!profile`);
-    return false;
-}
 function getRandomInt(min, max) {
   return Math.floor(Math.random() * (max - min + 1)) + min;
 }
-////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-///    Roll Thread
-////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-/* var list = {};
-var found = '';
-if(message.content.replace("::roll")){
-for (var index = 0; index < list.length; index++) {
-    if(list[index].includes(message.author.id) == true){
-        found = list[index]
-        break;
-    }
-}
-console.log(list[index] && ' ' && index)
-} */
 })
