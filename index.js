@@ -14,7 +14,7 @@ Bot.on('message',(message)=>{
     if(message.content == "::help"){
         console.log(`[DISCORD] ({${message.guild.name}} ${message.author.username} :: ${message.author.id}) => ${message.content}`)
         var integ = 0;
-            message.channel.send(`Команды: \n ::me <действие> - действие от первого лица \n ::try <действие> - попытать удачу \n ::do <действие> - действие от третьего лица \n ::todo <выражение>*<действие> - сказать что-то сделавши`);
+            message.channel.send(`Команды: \n ::me <действие> - действие от первого лица \n ::try <действие> - попытать удачу \n ::do <действие> - действие от третьего лица \n ::todo <выражение>*<действие> - сказать что-то сделавши \n ::s <выражение> - кричать \n ::w <выражение> - шептать`);
 
     }
 if(message.content.slice(0,5) == '::me ') {
@@ -66,7 +66,7 @@ if(message.content.slice(0,12) == '::debughelp'){
         return null;
     }
         console.log(`[DISCORD] ({${message.guild.name}} ${message.author.username} :: ${message.author.id}) => ${message.content}`)
-        message.channel.send(`Команды отладки: \n ::say <выражение> - сказать от лица бота.`);
+        message.channel.send(`Команды отладки: \n ::say <выражение> - сказать от лица бота. \n ::ver - Версия`);
 }
 if(message.content.slice(0,6) == '::say ') {
     if(message.author.id != '297318282724114433'){
@@ -77,8 +77,20 @@ if(message.content.slice(0,6) == '::say ') {
         message.channel.send(`${ttl}`);
     return false;
 }
+if(message.content.slice(0,4) == '::s ') {
+    console.log(`[DISCORD] ({${message.guild.name}} ${message.author.username} :: ${message.author.id}) => ${message.content}`)
+    var ttl = message.content.replace('::me ','')
+        message.channel.send(`_@everyone ${message.author.username} кричит:_ **${ttl}**`);
+    return false;
+}
+if(message.content.slice(0,4) == '::w ') {
+    console.log(`[DISCORD] ({${message.guild.name}} ${message.author.username} :: ${message.author.id}) => ${message.content}`)
+    var ttl = message.content.replace('::w ','')
+        message.channel.send(`_${message.author.username} шепчет:_ **${ttl}**`);
+    return false;
+}
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-var version = 'Версия InDev v1.22 - discord.js // JavaScript';
+var version = 'Версия InDev v1.3 - discord.js // JavaScript';
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 if(message.content.slice(0,6) == '::ver') {
     if(message.author.id != '297318282724114433'){
