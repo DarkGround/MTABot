@@ -109,6 +109,10 @@ if(message.content.slice(0,9) == '::report '){
         case true:
         report = '';
         author = msg
+        var readbleauthor = author;
+        author = author.replace('<@','')
+        author = author.replace('>','')
+        author = author.replace('!','')
         break;
         case false:
         for (var index = 0; index < msg.length; index++) {
@@ -123,14 +127,15 @@ if(message.content.slice(0,9) == '::report '){
                 break;
             }
         }
+        var readbleauthor = author;
         break;
     }
+    author = author.replace('<@','')
+    author = author.replace('>','')
+    author = author.replace('!','')
     ///
     var found = false;
     ///
-    var readbleauthor = author;
-    author = author.replace('<@','')
-    author = author.replace('>','')
     for(Count in Bot.users.array()){
         var User = Bot.users.array()[Count];
         if(User.id == author){
