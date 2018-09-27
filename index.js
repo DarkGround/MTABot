@@ -10,6 +10,7 @@ Bot.login(process.env.token);
 console.log('MTAshnik v1.0 Launched.')
 console.log('FULL - CONTROL MODE')
 console.log('::help for a help in discord.')
+var reportchannel = [];
 Bot.on('message',(message)=>{
     if(message.content == "::help"){
         console.log(`[DISCORD] ({${message.guild.name}} ${message.author.username} :: ${message.author.id}) => ${message.content}`)
@@ -66,7 +67,7 @@ if(message.content.slice(0,12) == '::debughelp'){
         return null;
     }
         console.log(`[DISCORD] ({${message.guild.name}} ${message.author.username} :: ${message.author.id}) => ${message.content}`)
-        message.channel.send(`Команды отладки: \n ::say <выражение> - сказать от лица бота. \n ::ver - Версия`);
+        message.channel.send(`Команды отладки: \n ::say <выражение> - сказать от лица бота. \n ::ver - Версия \n ::rchannel - Сменить канал оповещений о репортах`);
 }
 if(message.content.slice(0,6) == '::say ') {
     if(message.author.id != '297318282724114433'){
@@ -87,6 +88,104 @@ if(message.content.slice(0,4) == '::w ') {
     console.log(`[DISCORD] ({${message.guild.name}} ${message.author.username} :: ${message.author.id}) => ${message.content}`)
     var ttl = message.content.replace('::w ','')
         message.channel.send(`_${message.author.username} шепчет:_ **${ttl}**`);
+    return false;
+}
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+if(message.content.slice(0,9) == '::report '){
+    if(reportchannel == null){
+        let reportEmbed = new Discord.RichEmbed() 
+        .setDescription(" :x: Репорт не отправлен.") 
+        .setColor("#ff0000") 
+        .addField("Ваша жалоба не была отправлена.","Причина: не установлен канал репортов.")
+        message.channel.send(reportEmbed);
+    }
+    console.log(`[DISCORD] ({${message.guild.name}} ${message.author.username} :: ${message.author.id}) => ${message.content}`)
+    var msg = message.content.replace('::report ','')
+    var author = '';
+    var report = '';
+    switch(msg.replace(' ','') == msg){
+        case true:
+        report = '';
+        author = msg
+        break;
+        case false:
+        for (var index = 0; index < msg.length; index++) {
+            if(msg.charAt(index) == ' '){
+                author = msg.replace(msg.slice(index,msg.length),'')
+            }
+        }
+        for (var index = 0; index < msg.length; index++) {
+            if(msg.charAt(index) == ' '){
+                report = msg.replace(msg.slice(0,index + 1),'')
+            }
+        }
+        break;
+    }
+    ///
+    var found = false;
+    ///
+    var readbleauthor = author;
+    author = author.replace('<@','')
+    author = author.replace('>','')
+    for(Count in Bot.users.array()){
+        var User = Bot.users.array()[Count];
+        if(User.id == author){
+          found = true;
+        }
+    }
+    if(found == true){
+            var guildid = null;
+            for(var i = 0; i < reportchannel.length; i++){
+                if(reportchannel[i].includes(message.guild.id) == true){
+                    guildid = reportchannel[i].replace(`${message.guild.id}:`,'')
+                    break;
+                }
+            }
+            if(guildid == null){
+                let reportEmbed = new Discord.RichEmbed() 
+                .setDescription(" :x: Репорт не отправлен.") 
+                .setColor("#ff0000") 
+                .addField("Ваша жалоба не была отправлена.","Причина: не установлен канал репортов.")
+                message.channel.send(reportEmbed); 
+                return null;
+            }
+            const channel = Bot.channels.get(guildid)
+            if(report == ''){
+                report = '<Без причины>'
+            }
+            let reportEmbed = new Discord.RichEmbed() 
+            .setDescription(" :heavy_check_mark: Репорт отправлен.") 
+            .setColor("#ff0000") 
+            .addField("Ваша жалоба была отправлена.",`Жалоба была отправлена с сообщением:\n**${report}**`) 
+            message.channel.send(reportEmbed);
+            channel.send(`@here Жалоба от ${message.author} на ${readbleauthor} по причине: ${report}`);
+    }
+    else{
+        Guild.Channel
+        let reportEmbed = new Discord.RichEmbed() 
+            .setDescription(" :x: Репорт не отправлен.") 
+            .setColor("#ff0000") 
+            .addField("Ваша жалоба не была отправлена.",`Причина: такого пользователя не существует.`) 
+            message.channel.send(reportEmbed);
+    }
+}
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+if(message.content.slice(0,11) == '::rchannel ') {
+    if(message.author.id != '297318282724114433'){
+        message.channel.send(`Эта команда доступна только для cosmocat.`);
+        return null;
+    }
+    console.log(`[DISCORD] ({${message.guild.name}} ${message.author.username} :: ${message.author.id}) => ${message.content}`)
+    var ttl = message.content.replace('::rchannel ','')
+    for(var el = 0;el < reportchannel.length;el++){
+        if(reportchannel[el].includes(message.guild.id)){
+            reportchannel[el] = `${message.guild.id}:${ttl}`
+            message.channel.send(`Значение изменено.`);
+            return null;
+        }
+    }
+    reportchannel.push(`${message.guild.id}:${ttl}`)
+    message.channel.send(`Значение изменено.`);
     return false;
 }
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
