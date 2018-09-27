@@ -51,11 +51,13 @@ if(message.content.slice(0,7) == '::todo ') {
     for (var index = 0; index < ttl2.length; index++) {
         if(ttl2.charAt(index) == '*'){
             ttl2 = ttl2.replace(ttl2.slice(index,ttl2.length),'')
+            break;
         }
     }
     for (var index = 0; index < ttl.length; index++) {
         if(ttl.charAt(index) == '*'){
             ttl = ttl.replace(ttl.slice(0,index + 1),'')
+            break;
         }
     }
     message.channel.send(`**"${ttl2}"**, - сказал(а) _${message.author.username}_, **${ttl}**`);
@@ -112,11 +114,13 @@ if(message.content.slice(0,9) == '::report '){
         for (var index = 0; index < msg.length; index++) {
             if(msg.charAt(index) == ' '){
                 author = msg.replace(msg.slice(index,msg.length),'')
+                break;
             }
         }
         for (var index = 0; index < msg.length; index++) {
             if(msg.charAt(index) == ' '){
                 report = msg.replace(msg.slice(0,index + 1),'')
+                break;
             }
         }
         break;
