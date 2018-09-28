@@ -69,7 +69,7 @@ if(message.content.slice(0,12) == '::debughelp'){
         return null;
     }
         console.log(`[DISCORD] ({${message.guild.name}} ${message.author.username} :: ${message.author.id}) => ${message.content}`)
-        message.channel.send(`Команды отладки: \n ::say <выражение> - сказать от лица бота. \n ::ver - Версия \n ::rchannel - Сменить канал оповещений о репортах`);
+        message.channel.send(`Команды отладки: \n ::say <выражение> - сказать от лица бота. \n ::ver - Версия \n ::rchannel - Сменить канал оповещений о репортах \n ::jsonimport \n ::jsonexport`);
 }
 if(message.content.slice(0,6) == '::say ') {
     if(message.author.id != '297318282724114433'){
@@ -210,5 +210,30 @@ if(message.content.slice(0,6) == '::ver') {
 }
 function getRandomInt(min, max) {
   return Math.floor(Math.random() * (max - min + 1)) + min;
+}
+if(message.content.slice(0,12) == '::jsonexport') {
+    if(message.author.id != '297318282724114433'){
+        message.channel.send(`Эта команда доступна только для cosmocat.`);
+        return null;
+    }
+    var json = JSON.stringify(reportchannel);
+    var fs = require('fs');
+    fs.writeFile('config.json',json,'utf8', callback);
+    message.channel.send(`База данных загружена.`);
+    return false;
+}
+if(message.content.slice(0,12) == '::jsonimport') {
+    if(message.author.id != '297318282724114433'){
+        message.channel.send(`Эта команда доступна только для cosmocat.`);
+        return null;
+    }
+    const fs = require('fs');
+    let rawdata = fs.readFileSync('config.json');  
+    let jsondata = JSON.parse(rawdata);  
+    reportchannel = jsondata;
+    message.channel.send(`База данных загружена.`);
+}
+function callback(cb){
+    console.log(`[DISCORD] [Callback: ${cb}]({${message.guild.name}} ${message.author.username} :: ${message.author.id}) => ${message.content}`)
 }
 })
