@@ -4,18 +4,18 @@ const Client = require('discord.js');
 const RichEmbed = require('discord.js');
 const Message = require('discord.js');
 const User = require('discord.js');
-const Presence = require('discord.js');
+const ClientID = '487965836041256980'
 const Guild = require('discord.js');
 Bot.login(process.env.token);
 console.log('MTAshnik v1.0 Launched.')
 console.log('FULL - CONTROL MODE')
 console.log('::help for a help in discord.')
-var reportchannel = [];
+var reportchannel = ["285065576244838400:497738321506729994"];
 Bot.on('message',(message)=>{
     if(message.content == "::help"){
         console.log(`[DISCORD] ({${message.guild.name}} ${message.author.username} :: ${message.author.id}) => ${message.content}`)
         var integ = 0;
-            message.channel.send(`Команды: \n ::me <действие> - действие от первого лица \n ::try <действие> - попытать удачу \n ::do <действие> - действие от третьего лица \n ::todo <выражение>*<действие> - сказать что-то сделавши \n ::s <выражение> - кричать \n ::w <выражение> - шептать \n ::report <кто> <за что> - Пожаловаться на участника администраторам`);
+            message.channel.send(`Команды: \n ::me <действие> - действие от первого лица \n ::try <действие> - попытать удачу \n ::do <действие> - действие от третьего лица \n ::todo <выражение>*<действие> - сказать что-то сделавши \n ::s <выражение> - кричать \n ::w <выражение> - шептать \n ::report <кто> <за что> - Пожаловаться на участника администраторам \n cosmocat - этот придурок меня написал`);
 
     }
 if(message.content.slice(0,5) == '::me ') {
@@ -35,7 +35,7 @@ if(message.content.slice(0,6) == '::try ') {
     else {
         luck = 'Удачно'
     }
-        message.channel.send(`_${message.author.username}_ **${ttl}** _(${luck})_`);
+        message.channel.send(`_${message.author.username}_  **${ttl}** _(${luck})_`);
     return false;
 }
 if(message.content.slice(0,5) == '::do ') {
@@ -83,13 +83,13 @@ if(message.content.slice(0,6) == '::say ') {
 if(message.content.slice(0,4) == '::s ') {
     console.log(`[DISCORD] ({${message.guild.name}} ${message.author.username} :: ${message.author.id}) => ${message.content}`)
     var ttl = message.content.replace('::s ','')
-        message.channel.send(`_@everyone ${message.author.username} кричит:_ **${ttl}**`);
+        message.channel.send(`_ ${message.author.username} кричит:_ **${ttl}**`);
     return false;
 }
 if(message.content.slice(0,4) == '::w ') {
     console.log(`[DISCORD] ({${message.guild.name}} ${message.author.username} :: ${message.author.id}) => ${message.content}`)
     var ttl = message.content.replace('::w ','')
-        message.channel.send(`_${message.author.username} шепчет:_ **${ttl}**`);
+        message.channel.send(`_ ${message.author.username} шепчет:_ **${ttl}**`);
     return false;
 }
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -198,7 +198,7 @@ if(message.content.slice(0,11) == '::rchannel ') {
     return false;
 }
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-var version = 'Версия InDev v1.3 - discord.js // JavaScript';
+var version = 'Версия InDev v1.35 - discord.js // JavaScript';
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 if(message.content.slice(0,6) == '::ver') {
     if(message.author.id != '297318282724114433'){
@@ -219,7 +219,7 @@ if(message.content.slice(0,12) == '::jsonexport') {
     var json = JSON.stringify(reportchannel);
     var fs = require('fs');
     fs.writeFile('config.json',json,'utf8', callback);
-    message.channel.send(`База данных загружена.`);
+    message.channel.send(`База данных загружена на сервер.`);
     return false;
 }
 if(message.content.slice(0,12) == '::jsonimport') {
@@ -231,7 +231,7 @@ if(message.content.slice(0,12) == '::jsonimport') {
     let rawdata = fs.readFileSync('config.json');  
     let jsondata = JSON.parse(rawdata);  
     reportchannel = jsondata;
-    message.channel.send(`База данных загружена.`);
+    message.channel.send(`База данных загружена с сервера.`);
 }
 function callback(cb){
     console.log(`[DISCORD] [Callback: ${cb}]({${message.guild.name}} ${message.author.username} :: ${message.author.id}) => ${message.content}`)
