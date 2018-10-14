@@ -83,7 +83,7 @@ if(message.content.slice(0,6) == '::say ') {
 if(message.content.slice(0,4) == '::s ') {
     console.log(`[DISCORD] ({${message.guild.name}} ${message.author.username} :: ${message.author.id}) => ${message.content}`)
     var ttl = message.content.replace('::s ','')
-        message.channel.send(`_ ${message.author.username} кричит:_ **${ttl}**`);
+        message.channel.send(`_${message.author.username} кричит:_ **${ttl}**`);
     return false;
 }
 if(message.content.slice(0,4) == '::w ') {
