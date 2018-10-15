@@ -7,9 +7,16 @@ const User = require('discord.js');
 const ClientID = '487965836041256980'
 const Guild = require('discord.js');
 Bot.login(process.env.token);
-console.log('MTAshnik v1.0 Launched.')
-console.log('FULL - CONTROL MODE')
-console.log('::help for a help in discord.')
+console.log('=======================================================================================================================')
+console.log(' ___      ___  ___________   __        ________  __    __   _____  ___    __     __   ___  ')
+console.log("|   \    /   |(      _    ) /  \      /        )/  |  |  \ (\    \|   \  |  \   |/ | /   ) ")
+console.log(" \   \  //   | )__/  \\__/ /    \    (:   \___/(:  (__)  :)|.\\   \    | ||  |  (: |/   /  ")
+console.log(" /\\  \/.    |    \\_ /   /' /\  \    \___  \   \/      \/ |: \.   \\  | |:  |  |    __/   ")
+console.log("|: \.        |    |.  |  //  __'  \    __/  \\  //  __  \\ |.  \    \. | |.  |  (// _  \   ")
+console.log("|.  \    /:  |    \:  | /   /  \\  \  /  \   :)(:  (  )  :)|    \    \ | /\  |\ |: | \  \  ")
+console.log("|___|\__/|___|     \__|(___/    \___)(_______/  \__|  |__/  \___|\____\)(__\_|_)(__|  \__) ")
+console.log("::help for help in discord.")
+console.log('=======================================================================================================================')
 var reportchannel = ["285065576244838400:497738321506729994"];
 Bot.on('message',(message)=>{
     if(message.content == "::help"){
@@ -113,6 +120,7 @@ if(message.content.slice(0,9) == '::report '){
         author = author.replace('<@','')
         author = author.replace('>','')
         author = author.replace('!','')
+        author = author.replace('&','')
         break;
         case false:
         for (var index = 0; index < msg.length; index++) {
@@ -133,6 +141,7 @@ if(message.content.slice(0,9) == '::report '){
     author = author.replace('<@','')
     author = author.replace('>','')
     author = author.replace('!','')
+    author = author.replace('&','')
     ///
     var found = false;
     ///
@@ -167,7 +176,7 @@ if(message.content.slice(0,9) == '::report '){
             .setColor("#ff0000") 
             .addField("Ваша жалоба была отправлена.",`Жалоба была отправлена с сообщением:\n**${report}**`) 
             message.channel.send(reportEmbed);
-            channel.send(`@here Жалоба от ${message.author} на ${readbleauthor} по причине: ${report}`);
+            channel.send(`{Канал: #${message.channel.name}} @here Жалоба от ${message.author} на ${readbleauthor} по причине: ${report}`);
     }
     else{
         Guild.Channel
