@@ -38,7 +38,7 @@ console.log('[CONSOLE] "сас © кто-то 2018"')
 console.log("[CONSOLE] ::help for help in discord.")
 console.log('=======================================================================================================================')
 var reportchannel = ["285065576244838400:497738321506729994"];
-var additionalowner
+var additionalowner = "297318282724114433"
 Bot.on('message',(message)=>{
     if(message.content == "::help"){
         console.log(`[DISCORD] ({${message.guild.name} / {message.channel.name}} ${message.author.username} :: ${message.author.id}) => ${message.content} (${currdate})`)
