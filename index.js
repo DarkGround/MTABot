@@ -38,6 +38,7 @@ console.log('[CONSOLE] "сас © кто-то 2018"')
 console.log("[CONSOLE] ::help for help in discord.")
 console.log('=======================================================================================================================')
 var reportchannel = ["285065576244838400:497738321506729994"];
+var additionalowner
 Bot.on('message',(message)=>{
     if(message.content == "::help"){
         console.log(`[DISCORD] ({${message.guild.name} / {message.channel.name}} ${message.author.username} :: ${message.author.id}) => ${message.content} (${currdate})`)
@@ -91,21 +92,25 @@ if(message.content.slice(0,7) == '::todo ') {
     return false;
 }
 if(message.content.slice(0,12) == '::debughelp'){
-    if(message.author.id != '297318282724114433'){
-        message.channel.send(`Эта команда доступна только для cosmocat.`);
+    if(message.author.id = ('297318282724114433' || additionalowner)){
+        console.log(`[DISCORD] ({${message.guild.name} / ${message.channel.name}} ${message.author.username} :: ${message.author.id}) => ${message.content} (${currdate})`)
+        message.channel.send(`Команды отладки: \n ::say <выражение> - сказать от лица бота. \n ::ver - Версия \n ::rchannel - Сменить канал оповещений о репортах \n ::jsonimport - загрузить базу данных`);
+    }
+    else{
+        message.channel.send(`Эта команда доступна только для cosmocat или модератора.`);
         return null;
     }
-        console.log(`[DISCORD] ({${message.guild.name} / ${message.channel.name}} ${message.author.username} :: ${message.author.id}) => ${message.content} (${currdate})`)
-        message.channel.send(`Команды отладки: \n ::say <выражение> - сказать от лица бота. \n ::ver - Версия \n ::rchannel - Сменить канал оповещений о репортах \n ::jsonimport \n ::jsonexport`);
 }
 if(message.content.slice(0,6) == '::say ') {
-    if(message.author.id != '297318282724114433'){
-        message.channel.send(`Эта команда доступна только для cosmocat.`);
+    if(message.author.id = ('297318282724114433' || additionalowner)){
+        var ttl = message.content.replace('::say ','')
+        message.channel.send(`${ttl}`);
+        return false;
+    }
+    else{
+        message.channel.send(`Эта команда доступна только для cosmocat или модератора.`);
         return null;
     }
-    var ttl = message.content.replace('::say ','')
-        message.channel.send(`${ttl}`);
-    return false;
 }
 if(message.content.slice(0,4) == '::s ') {
     console.log(`[DISCORD] ({${message.guild.name} / ${message.channel.name}} ${message.author.username} :: ${message.author.id}) => ${message.content} (${currdate})`)
@@ -213,31 +218,40 @@ if(message.content.slice(0,9) == '::report '){
 }
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 if(message.content.slice(0,11) == '::rchannel ') {
+    if(message.author.id = ('297318282724114433' || additionalowner)){
+        console.log(`[DISCORD] ({${message.guild.name} / ${message.channel.name}} ${message.author.username} :: ${message.author.id}) => ${message.content} (${currdate})`)
+        var ttl = message.content.replace('::rchannel ','')
+        for(var el = 0;el < reportchannel.length;el++){
+            if(reportchannel[el].includes(message.guild.id)){
+                reportchannel[el] = `${message.guild.id}:${ttl}`
+                message.channel.send(`Значение изменено.`);
+                return null;
+            }
+        }
+        reportchannel.push(`${message.guild.id}:${ttl}`)
+        message.channel.send(`Значение изменено.`);
+        return false;
+    }
+    else{
+        message.channel.send(`Эта команда доступна только для cosmocat или модератора.`);
+        return null;
+    }
+}
+if(message.content.slice(0,11) == '::addowner ') {
     if(message.author.id != '297318282724114433'){
-        message.channel.send(`Эта команда доступна только для cosmocat.`);
+        message.channel.send(`Эта команда доступна только для cosmocat`);
         return null;
     }
     console.log(`[DISCORD] ({${message.guild.name} / ${message.channel.name}} ${message.author.username} :: ${message.author.id}) => ${message.content} (${currdate})`)
-    var ttl = message.content.replace('::rchannel ','')
-    for(var el = 0;el < reportchannel.length;el++){
-        if(reportchannel[el].includes(message.guild.id)){
-            reportchannel[el] = `${message.guild.id}:${ttl}`
-            message.channel.send(`Значение изменено.`);
-            return null;
-        }
-    }
-    reportchannel.push(`${message.guild.id}:${ttl}`)
-    message.channel.send(`Значение изменено.`);
+    var ttl = message.content.replace('::addowner ','')
+    additionalowner = ttl;
+    message.channel.send(`Установлен новый модератор. Теперь ему доступны функции ::debughelp`);
     return false;
 }
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 var version = 'Версия InDev v1.5 - discord.js // JavaScript';
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 if(message.content.slice(0,6) == '::ver') {
-    if(message.author.id != '297318282724114433'){
-        message.channel.send(`Эта команда доступна только для cosmocat.`);
-        return null;
-    }
     message.channel.send(`${version}`);
     return false;
 }
@@ -251,7 +265,7 @@ function include(url) {
 }
 if(message.content.slice(0,12) == '::jsonimport') {
     if(message.author.id != '297318282724114433'){
-        message.channel.send(`Эта команда доступна только для cosmocat.`);
+        message.channel.send(`Эта команда доступна только для cosmocat`);
         return null;
     }
     const fs = require('fs');
