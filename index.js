@@ -103,6 +103,7 @@ if(message.content.slice(0,12) == '::debughelp'){
 }
 if(message.content.slice(0,6) == '::say ') {
     if(message.author.id == '297318282724114433' || message.author.id == additionalowner){
+        console.log(`[DISCORD] ({${message.guild.name} / ${message.channel.name}} ${message.author.username} :: ${message.author.id}) => ${message.content} (${currdate})`)
         var ttl = message.content.replace('::say ','')
         message.channel.send(`${ttl}`);
         return false;
@@ -115,13 +116,13 @@ if(message.content.slice(0,6) == '::say ') {
 if(message.content.slice(0,4) == '::s ') {
     console.log(`[DISCORD] ({${message.guild.name} / ${message.channel.name}} ${message.author.username} :: ${message.author.id}) => ${message.content} (${currdate})`)
     var ttl = message.content.replace('::s ','')
-        message.channel.send(`_${message.author.username} кричит:_ **${ttl}**`);
+    message.channel.send(`_${message.author.username} кричит:_ **${ttl}**`);
     return false;
 }
 if(message.content.slice(0,4) == '::w ') {
     console.log(`[DISCORD] ({${message.guild.name} / ${message.channel.name}} ${message.author.username} :: ${message.author.id}) => ${message.content} (${currdate})`)
     var ttl = message.content.replace('::w ','')
-        message.channel.send(`_ ${message.author.username} шепчет:_ **${ttl}**`);
+    message.channel.send(`_ ${message.author.username} шепчет:_ **${ttl}**`);
     return false;
 }
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -263,6 +264,7 @@ if(message.content.slice(0,11) == '::remowner') {
 var version = 'Версия InDev v1.6 - discord.js // JavaScript';
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 if(message.content.slice(0,6) == '::ver') {
+    console.log(`[DISCORD] ({${message.guild.name} / ${message.channel.name}} ${message.author.username} :: ${message.author.id}) => ${message.content} (${currdate})`)
     message.channel.send(`${version}`);
     return false;
 }
@@ -275,6 +277,7 @@ function include(url) {
     document.getElementsByTagName('head')[0].appendChild(script);
 }
 if(message.content.slice(0,12) == '::jsonimport') {
+    console.log(`[DISCORD] ({${message.guild.name} / ${message.channel.name}} ${message.author.username} :: ${message.author.id}) => ${message.content} (${currdate})`)
     if(message.author.id != '297318282724114433'){
         message.channel.send(`Эта команда доступна только для cosmocat`);
         return null;
