@@ -375,7 +375,7 @@ Bot.on('message', (message) => {
             message.reply("Такого пользователя не существует!")
             return;
         }
-        if (message.member.roles.find("name", "MAdmin")) {
+        if (message.member.hasPermission('BAN_MEMBERS')) {
             var massfound = false;
             for (var i = 0; i < warns.length; i++) {
                 if (warns[i].startsWith(auth)) {
@@ -412,7 +412,7 @@ Bot.on('message', (message) => {
             console.log(`[DISCORD] ({${message.guild.name} / ${message.channel.name}} ${message.author.username} :: ${message.author.id}) => ${message.content} (${currdate})`)
         }
         else {
-            message.channel.send(`Эта команда доступна только для людей с ролью "MAdmin"`);
+            message.channel.send(`Эта команда доступна только для людей с правом бана.`);
             return null;
         }
     }
@@ -520,7 +520,7 @@ Bot.on('message', (message) => {
                 return;
             }
         }
-        if (message.member.roles.find("name", "MAdmin")) {
+        if (message.member.hasPermission('BAN_MEMBERS')) {
             var massfound = false;
             for (var i = 0; i < warns.length; i++) {
                 if (warns[i].startsWith(author)) {
@@ -578,7 +578,7 @@ Bot.on('message', (message) => {
             console.log(`[DISCORD] ({${message.guild.name} / ${message.channel.name}} ${message.author.username} :: ${message.author.id}) => ${message.content} (${currdate})`)
         }
         else {
-            message.channel.send(`Эта команда доступна только для людей с ролью "MAdmin"`);
+            message.channel.send(`Эта команда доступна только для людей с правом бана.`);
             return null;
         }
     }
