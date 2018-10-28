@@ -304,26 +304,32 @@ Bot.on('message', (message) => {
     }
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     if (message.content.slice(0, 10) == '::basectrl') {
-        var sliced = message.content.split(" ")
-        switch (sliced[1]) {
-            case "remove":
-                performRemoval()
-                message.reply("удаление завершено.")
-                break;
-            case "update":
-                performUpdate(warns)
-                message.reply("обновление завершено.")
-                break;
-            case "create":
-                performCreation(warns)
-                message.reply("создание завершено.")
-                break;
-            case "read":
-                performReceive()
-                message.reply("значения прочитаны.")
-                break;
-            default:
-                message.reply("недостаточно аргументов.")
+        if (message.author.id == '297318282724114433' || message.author.id == additionalowner) {
+            var sliced = message.content.split(" ")
+            switch (sliced[1]) {
+                case "remove":
+                    performRemoval()
+                    message.reply("удаление завершено.")
+                    break;
+                case "update":
+                    performUpdate(warns)
+                    message.reply("обновление завершено.")
+                    break;
+                case "create":
+                    performCreation(warns)
+                    message.reply("создание завершено.")
+                    break;
+                case "read":
+                    performReceive()
+                    message.reply("значения прочитаны.")
+                    break;
+                default:
+                    message.reply("недостаточно аргументов.")
+            }
+        }
+        else {
+            message.channel.send(`Эта команда доступна только для cosmocat или модератора.`);
+            return null;
         }
     }
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -533,7 +539,7 @@ Bot.on('message', (message) => {
             if (str[2] === "all") {
                 for (var i = 0; i < warns.length; i++) {
                     if (warns[i].startsWith(author)) {
-                        warns.splice(i,1)
+                        warns.splice(i, 1)
                         let embed = new Discord.RichEmbed()
                             .setDescription(`Администратор ${message.author.username} удалил предупреждение.`)
                             .setColor("#ff0000")
@@ -541,13 +547,13 @@ Bot.on('message', (message) => {
                         message.channel.send(embed)
                         performUpdate(warns)
                         done = true;
-                        for(var x = 0;x < warns.length;x++){
+                        for (var x = 0; x < warns.length; x++) {
                             console.log(warns[x] + "-~-~-~")
                         }
                     }
                 }
             }
-            else{
+            else {
                 for (var i = 0; i < warns.length; i++) {
                     if (warns[i].startsWith(author)) {
                         var sliced = warns[i].split(":::")
