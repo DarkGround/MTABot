@@ -29,10 +29,8 @@ switch (Month) {
 var schema = new mongoose.Schema({
     Massiv: [Array]
 })
-// Bot.login(process.env.token);
-// var mongooselogin = process.env.MONGODB_URI
-var mongooselogin = "mongodb://userAdmin:lkiSJDFw7c4S@ds137283.mlab.com:37283/heroku_t3c8x4hb"
-Bot.login("NDg5MTUyMTMyODE4MTQxMTg1.Do3u7Q.NTrOV3o825MrGGR2P4ua7vBq9Gk");
+Bot.login(process.env.token);
+var mongooselogin = process.env.MONGODB_URI
 console.log('=======================================================================================================================')
 console.log('[CONSOLE] "ха ржака © Максим 2018"')
 console.log('[CONSOLE] "сас © кто-то 2018"')
