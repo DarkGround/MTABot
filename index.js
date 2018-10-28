@@ -412,7 +412,7 @@ Bot.on('message', (message) => {
             console.log(`[DISCORD] ({${message.guild.name} / ${message.channel.name}} ${message.author.username} :: ${message.author.id}) => ${message.content} (${currdate})`)
         }
         else {
-            message.channel.send(`Эта команда доступна только для людей с правом бана.`);
+            message.channel.send(`Не хватает прав для использования этой команды.`);
             return null;
         }
     }
@@ -578,7 +578,7 @@ Bot.on('message', (message) => {
             console.log(`[DISCORD] ({${message.guild.name} / ${message.channel.name}} ${message.author.username} :: ${message.author.id}) => ${message.content} (${currdate})`)
         }
         else {
-            message.channel.send(`Эта команда доступна только для людей с правом бана.`);
+            message.channel.send(`Не хватает прав для использования этой команды.`);
             return null;
         }
     }
