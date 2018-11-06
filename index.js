@@ -43,7 +43,7 @@ var reportchannel = ["285065576244838400:497738321506729994"];
 var warns = [];
 var additionalowner;
 performReceive()
-client.on('ready', () => {
+Bot.on('ready', () => {
     var num = 0;
     console.log('MTABot готов к работе.')
     console.log("Найдено " + RPCActivity.length + " RPC надписей.")
