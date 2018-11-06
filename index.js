@@ -1,6 +1,5 @@
 ﻿const Discord = require('discord.js');
 const Bot = new Discord.Client();
-const Client = require('discord.js');
 const RichEmbed = require('discord.js');
 const Message = require('discord.js');
 const User = require('discord.js');
@@ -47,12 +46,12 @@ Bot.on('ready', () => {
     var num = 0;
     console.log('MTABot готов к работе.')
     console.log("Найдено " + RPCActivity.length + " RPC надписей.")
-    client.user.setActivity(`::help`, { type: "PLAYING" })
+    Bot.user.setActivity(`::help`, { type: "PLAYING" })
     console.log("[-] Начальный RPC установлен - '::help'")
     console.log(`[-] Отображение RPC Логов? - ${ActivityDisplay}`)
     setInterval(() => {
         if (num + 1 <= RPCActivity.length) {
-            client.user.setActivity(RPCActivity[num], { type: "PLAYING" })
+            Bot.user.setActivity(RPCActivity[num], { type: "PLAYING" })
             if (ActivityDisplay == true) {
                 console.log(`[${num + 1}] RPC установлен - '${RPCActivity[num]}'`)
             }
@@ -60,7 +59,7 @@ Bot.on('ready', () => {
         }
         else {
             num = 0;
-            client.user.setActivity(RPCActivity[num], { type: "PLAYING" })
+            Bot.user.setActivity(RPCActivity[num], { type: "PLAYING" })
             if (ActivityDisplay == true) {
                 console.log(`[${num + 1}] RPC установлен - '${RPCActivity[num]}'`)
             }
