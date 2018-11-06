@@ -79,7 +79,7 @@ Bot.on('message', (message) => {
     var currdate = Day + " " + fMonth + " " + Year + " :: " + Data.toLocaleTimeString()
     ////////
     if (message.content == "::help") {
-        console.log(`[DISCORD] ({${message.guild.name} / {message.channel.name}} ${message.author.username} :: ${message.author.id}) => ${message.content} (${currdate})`)
+        console.log(`[DISCORD] ({${message.guild.name} / ${message.channel.name}} ${message.author.username} :: ${message.author.id}) => ${message.content} (${currdate})`)
         var integ = 0;
         message.channel.send(`Команды: \n ::me <действие> - действие от первого лица \n ::try <действие> - попытать удачу \n ::do <действие> - действие от третьего лица \n ::todo <выражение>*<действие> - сказать что-то сделавши \n ::s <выражение> - кричать \n ::w <выражение> - шептать \n ::report <кто> <за что> - Пожаловаться на участника администраторам \n ::warn <кто> <причина> - предупреждение [MAdmin] \n ::cwarn <пусто>/<кто> - проверить предупреждения \n ::rwarn <кто> <№предупреждения> - удалить предупреждение [MAdmin] \n cosmocat - этот придурок меня написал`);
     }
