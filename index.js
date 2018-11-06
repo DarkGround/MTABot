@@ -30,7 +30,6 @@ var schema = new mongoose.Schema({
 })
 Bot.login(process.env.token);
 var Activity = process.env.ActivityString;
-var ActivityDisplay = (process.env.ActivityDisplay === 'true')
 var RPCActivity = Activity.split(" /%/ ")
 var mongooselogin = process.env.MONGODB_URI
 console.log('=======================================================================================================================')
@@ -47,22 +46,14 @@ Bot.on('ready', () => {
     console.log('MTABot готов к работе.')
     console.log("Найдено " + RPCActivity.length + " RPC надписей.")
     Bot.user.setActivity(`::help`, { type: "PLAYING" })
-    console.log("[-] Начальный RPC установлен - '::help'")
-    console.log(`[-] Отображение RPC Логов? - ${ActivityDisplay}`)
     setInterval(() => {
         if (num + 1 <= RPCActivity.length) {
             Bot.user.setActivity(RPCActivity[num], { type: "PLAYING" })
-            if (ActivityDisplay == true) {
-                console.log(`[${num + 1}] RPC установлен - '${RPCActivity[num]}'`)
-            }
             num += 1;
         }
         else {
             num = 0;
             Bot.user.setActivity(RPCActivity[num], { type: "PLAYING" })
-            if (ActivityDisplay == true) {
-                console.log(`[${num + 1}] RPC установлен - '${RPCActivity[num]}'`)
-            }
         }
     }, 15000)
 })
