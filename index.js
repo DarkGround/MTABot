@@ -30,7 +30,7 @@ var schema = new mongoose.Schema({
 })
 Bot.login(process.env.token);
 var Activity = process.env.ActivityString;
-var ActivityDisplay = process.env.ActivityDisplay;
+var ActivityDisplay = (process.env.ActivityDisplay === 'true')
 var RPCActivity = Activity.split(" /%/ ")
 var mongooselogin = process.env.MONGODB_URI
 console.log('=======================================================================================================================')
