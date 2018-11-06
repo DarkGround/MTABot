@@ -30,6 +30,9 @@ var schema = new mongoose.Schema({
     Massiv: [Array]
 })
 Bot.login(process.env.token);
+var Activity = process.env.ActivityString;
+var ActivityDisplay = process.env.ActivityDisplay;
+var RPCActivity = Activity.split(" /%/ ")
 var mongooselogin = process.env.MONGODB_URI
 console.log('=======================================================================================================================')
 console.log('[CONSOLE] "ха ржака © Максим 2018"')
@@ -38,8 +41,32 @@ console.log("[CONSOLE] ::help for help in discord.")
 console.log('=======================================================================================================================')
 var reportchannel = ["285065576244838400:497738321506729994"];
 var warns = [];
-performReceive()
 var additionalowner;
+performReceive()
+client.on('ready', () => {
+    var num = 0;
+    console.log('MTABot готов к работе.')
+    console.log("Найдено " + RPCActivity.length + " RPC надписей.")
+    client.user.setActivity(`::help`, { type: "PLAYING" })
+    console.log("[-] Начальный RPC установлен - '::help'")
+    console.log(`[-] Отображение RPC Логов? - ${ActivityDisplay}`)
+    setInterval(() => {
+        if (num + 1 <= RPCActivity.length) {
+            client.user.setActivity(RPCActivity[num], { type: "PLAYING" })
+            if (ActivityDisplay == true) {
+                console.log(`[${num + 1}] RPC установлен - '${RPCActivity[num]}'`)
+            }
+            num += 1;
+        }
+        else {
+            num = 0;
+            client.user.setActivity(RPCActivity[num], { type: "PLAYING" })
+            if (ActivityDisplay == true) {
+                console.log(`[${num + 1}] RPC установлен - '${RPCActivity[num]}'`)
+            }
+        }
+    }, 15000)
+})
 Bot.on('message', (message) => {
     Data = new Date();
     var Year = Data.getFullYear();
